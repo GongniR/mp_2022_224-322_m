@@ -1,4 +1,3 @@
-import numpy as np
 def draw_chess()->None:
     """
     Отрисовка шахматной доски

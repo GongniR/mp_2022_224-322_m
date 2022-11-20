@@ -5,6 +5,7 @@ wall_cell = "■"
 box = "⧈"
 
 def add_wall(map_array: list) -> list:
+    """ Добавление стен """
     for number_row in range(len(map_array)):
         if number_row == 0 or number_row == len(map_array)-1:
             map_array[number_row] = [wall_cell for i in range(len(map_array[number_row]))]
@@ -18,7 +19,7 @@ def add_wall(map_array: list) -> list:
     return map_array
 
 def add_box(map_array: list, count_box = 10)->list:
-
+    """ Добавление коробок """
     if count_box>106:
         return add_box(map_array, 106)
 
@@ -35,7 +36,7 @@ def add_box(map_array: list, count_box = 10)->list:
 
 
 def create_map(height = 9, width = 21, box_count = 10) -> list:
-
+    """ Создание карты """
     map_array =  [[void_cell for j in range(width) ] for i in range(height)]
     map_array = add_wall(map_array)
     map_array = add_box(map_array,box_count)
@@ -44,6 +45,7 @@ def create_map(height = 9, width = 21, box_count = 10) -> list:
 test_map = create_map()
 
 def draw_map()->None:
+    """ Отрисовка карты """
     map_array = create_map()
     for line in map_array:
         for elem in line:
