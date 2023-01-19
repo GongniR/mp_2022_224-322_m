@@ -1,6 +1,7 @@
 import os
 import sqlite3
 import hashlib
+import sys
 from concurrent.futures import ThreadPoolExecutor, wait, ALL_COMPLETED
 from tqdm import tqdm
 import shutil
@@ -10,9 +11,11 @@ import argparse
 from termcolor import colored
 
 
-DELETE = colored('DELETED', "red")
+DELETE = colored('DELETE', "red")
 CHANGE = colored('CHANGE', "yellow")
 NEW = colored('NEW', "green")
+
+import re
 
 
 def get_list_path_files(folder_path: str) -> list[str]:
@@ -187,9 +190,9 @@ def change_files(original_folder_path: str, clone_folder_path: str, table_name: 
     df_update = df.loc[(df['file_tag'] != 'NOT CHANGE')][['name_file', 'file_tag']]
 
     # df_update = colored(df_update, 'red')
-    print('Обновленные файлы: ')
+    print('Обновленные файлы: ', '\n')
     if len(df_update) > 0:
-        print(df_update.to_string(header=False))
+        print(df_update.to_string(header=False),'\n')
         # вернуть значение
         df.loc[(df.file_tag == "NOT CHANGE"), ('file_tag')] = 'ADD'
         df.loc[(df.file_tag == NEW), ('file_tag')] = 'PENDING'
