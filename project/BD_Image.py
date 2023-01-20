@@ -148,7 +148,7 @@ def update_files(original_folder_path: str, clone_folder_path: str, table_name: 
 
     print("Обновление файлов завершено!")
     print("Обновление информации в БД...")
-    cur.execute(f"""UPDATE '{table_name}' SET file_tag = 'ADD' WHERE file_tag = 'CHANGE'""")
+    cur.execute(f"""UPDATE '{table_name}' SET file_tag = 'ADD' WHERE file_tag = '{CHANGE}'""")
     conn.commit()
 
 
